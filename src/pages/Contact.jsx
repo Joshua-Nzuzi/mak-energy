@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
+import emailjs from '@emailjs/browser';
 
 const PageTransition = ({ children }) => (
   <motion.div
@@ -46,12 +47,24 @@ const Contact = () => {
     }
 
     try {
-      // Simulation d'envoi
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await emailjs.send(
+        'service_dku2oe7',     // ← remplace ici
+        'template_7an2egk',    // ← remplace ici
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        'jYwSbHJgipbVSb_tC'       // ← remplace ici
+      );
+
       toast({
         title: "Message envoyé !",
         description: "Merci. Nous avons bien reçu votre message et nous vous répondrons rapidement.",
       });
+
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
     } catch (error) {
       toast({
@@ -114,7 +127,7 @@ const Contact = () => {
                 <Mail className="h-6 w-6 text-accent mt-1" />
                 <div>
                   <h3 className="font-semibold">Email</h3>
-                  <a href="mailto:dibainvest@gmail.com" className="text-gray-300 hover:text-accent transition-colors">makayamichel@gmail.com</a>
+                  <a href="mailto:makayamichel@gmail.com" className="text-gray-300 hover:text-accent transition-colors">makayamichel@gmail.com</a>
                 </div>
               </div>
               <div className="flex items-start gap-4">
