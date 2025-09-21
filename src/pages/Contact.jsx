@@ -27,6 +27,8 @@ const Contact = () => {
     botcheck: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -34,18 +36,30 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    if (!formData.name || !formData.email || !formData.message) {
-      toast({
-        title: "Champs manquants",
-        description: "Veuillez remplir tous les champs obligatoires.",
-        variant: "destructive"
-      });
-      setIsSubmitting(false);
-      return;
-    }
+  const result = contactSchema.safeParse(formData);
+
+  if (!result.success) {
+    const fieldErrors = {};
+    result.error.errors.forEach(err => {
+      fieldErrors[err.path[0]] = err.message;
+    });
+
+    setErrors(fieldErrors);
+
+    toast({
+      title: "Erreur de validation",
+      description: "Veuillez corriger les champs indiqués.",
+      variant: "destructive"
+    });
+
+    setIsSubmitting(false);
+    return;
+  }
+
+  setErrors({});
 
     try {
       await emailjs.send(
@@ -157,11 +171,15 @@ const Contact = () => {
                   placeholder="Votre nom complet *" required
                   className="w-full bg-secondary/50 border border-border px-4 py-3 rounded-md focus:ring-accent focus:border-accent"
                 />
+                {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+
                 <input
                   type="email" name="email" value={formData.email} onChange={handleInputChange}
                   placeholder="Votre adresse email *" required
                   className="w-full bg-secondary/50 border border-border px-4 py-3 rounded-md focus:ring-accent focus:border-accent"
                 />
+                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+
               </div>
               <div className="grid sm:grid-cols-2 gap-6">
                 <input
@@ -169,11 +187,15 @@ const Contact = () => {
                   placeholder="Votre téléphone"
                   className="w-full bg-secondary/50 border border-border px-4 py-3 rounded-md focus:ring-accent focus:border-accent"
                 />
+                {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+
                 <input
                   type="text" name="subject" value={formData.subject} onChange={handleInputChange}
                   placeholder="Sujet de votre message"
                   className="w-full bg-secondary/50 border border-border px-4 py-3 rounded-md focus:ring-accent focus:border-accent"
                 />
+                {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
+
               </div>
               <textarea
                 name="message" value={formData.message} onChange={handleInputChange}
@@ -181,6 +203,8 @@ const Contact = () => {
                 className="w-full bg-secondary/50 border border-border px-4 py-3 rounded-md focus:ring-accent focus:border-accent resize-none"
               >
               </textarea>
+              {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
+
               <input
   type="text"
   name="botcheck"
