@@ -30,50 +30,47 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
 
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setIsSubmitting(true);
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  const result = contactSchema.safeParse(formData);
+    // ✅ Validation avec Zod
+    const result = contactSchema.safeParse(formData);
 
-  if (!result.success) {
-  const fieldErrors = {};
-  let errorMessages = []; // ✅ à ajouter
+    if (!result.success) {
+      const fieldErrors = {};
+      let errorMessages = [];
 
-  // ✅ Zod retourne les erreurs dans "issues", pas "errors"
-  if (Array.isArray(result.error?.issues)) {
-    result.error.issues.forEach(err => {
-      fieldErrors[err.path[0]] = err.message;
-      errorMessages.push(`${err.path[0]} : ${err.message}`); // ✅ on stocke les détails
-    });
-  }
+      if (Array.isArray(result.error?.issues)) {
+        result.error.issues.forEach(err => {
+          fieldErrors[err.path[0]] = err.message;
+          errorMessages.push(`${err.path[0]} : ${err.message}`);
+        });
+      }
 
-  setErrors(fieldErrors);
+      setErrors(fieldErrors);
 
-  toast({
-    title: "Erreur de validation",
-    description: errorMessages.join(" | "), // ✅ plus jamais undefined
-    variant: "destructive"
-  });
+      toast({
+        title: "Erreur de validation",
+        description: errorMessages.join(" | "),
+        variant: "destructive"
+      });
 
-  setIsSubmitting(false);
-  return;
-}
+      setIsSubmitting(false);
+      return;
+    }
 
-
-
-  setErrors({});
+    setErrors({}); // ✅ reset si tout est bon
 
     try {
       await emailjs.send(
-        'service_4h8g9rf',     // ← remplace ici
-        'template_7an2egk',    // ← remplace ici
+        'service_4h8g9rf',     // ⚠️ remplace par ton service ID
+        'template_7an2egk',    // ⚠️ remplace par ton template ID
         {
           name: formData.name,
           email: formData.email,
@@ -81,15 +78,15 @@ const Contact = () => {
           subject: formData.subject,
           message: formData.message,
         },
-        'jYwSbHJgipbVSb_tC'       // ← remplace ici
+        'jYwSbHJgipbVSb_tC'    // ⚠️ remplace par ta clé publique
       );
 
       toast({
-        title: "Message envoyé !",
+        title: "Message envoyé ✅",
         description: "Merci. Nous avons bien reçu votre message et nous vous répondrons rapidement.",
       });
 
-      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '', botcheck: '' });
     } catch (error) {
       toast({
         title: "Erreur",
@@ -105,7 +102,10 @@ const Contact = () => {
     <PageTransition>
       <Helmet>
         <title>Contactez Mak Energy | Devis et Informations</title>
-        <meta name="description" content="Contactez l'équipe de Mak Energy pour toute demande de devis, de partenariat ou d'information sur nos services énergétiques." />
+        <meta
+          name="description"
+          content="Contactez l'équipe de Mak Energy pour toute demande de devis, de partenariat ou d'information sur nos services énergétiques."
+        />
       </Helmet>
 
       {/* Hero Section */}
@@ -127,6 +127,7 @@ const Contact = () => {
       {/* Contact Form & Info */}
       <section className="section-padding">
         <div className="container-custom grid lg:grid-cols-3 gap-12">
+          
           {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -174,54 +175,65 @@ const Contact = () => {
           >
             <h2 className="text-3xl mb-6">Envoyez-nous un message</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
+              
               <div className="grid sm:grid-cols-2 gap-6">
-                <input
-                  type="text" name="name" value={formData.name} onChange={handleInputChange}
-                  placeholder="Votre nom complet *" required
-                  className="w-full bg-secondary/50 border border-border px-4 py-3 rounded-md focus:ring-accent focus:border-accent"
-                />
-                {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                <div>
+                  <input
+                    type="text" name="name" value={formData.name} onChange={handleInputChange}
+                    placeholder="Votre nom complet *" required
+                    className="w-full bg-secondary/50 border border-border px-4 py-3 rounded-md focus:ring-accent focus:border-accent"
+                  />
+                  {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                </div>
 
-                <input
-                  type="email" name="email" value={formData.email} onChange={handleInputChange}
-                  placeholder="Votre adresse email *" required
-                  className="w-full bg-secondary/50 border border-border px-4 py-3 rounded-md focus:ring-accent focus:border-accent"
-                />
-                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-
+                <div>
+                  <input
+                    type="email" name="email" value={formData.email} onChange={handleInputChange}
+                    placeholder="Votre adresse email *" required
+                    className="w-full bg-secondary/50 border border-border px-4 py-3 rounded-md focus:ring-accent focus:border-accent"
+                  />
+                  {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                </div>
               </div>
+
               <div className="grid sm:grid-cols-2 gap-6">
-                <input
-                  type="tel" name="phone" value={formData.phone} onChange={handleInputChange}
-                  placeholder="Votre téléphone"
-                  className="w-full bg-secondary/50 border border-border px-4 py-3 rounded-md focus:ring-accent focus:border-accent"
-                />
-                {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+                <div>
+                  <input
+                    type="tel" name="phone" value={formData.phone} onChange={handleInputChange}
+                    placeholder="Votre téléphone"
+                    className="w-full bg-secondary/50 border border-border px-4 py-3 rounded-md focus:ring-accent focus:border-accent"
+                  />
+                  {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+                </div>
 
-                <input
-                  type="text" name="subject" value={formData.subject} onChange={handleInputChange}
-                  placeholder="Sujet de votre message"
-                  className="w-full bg-secondary/50 border border-border px-4 py-3 rounded-md focus:ring-accent focus:border-accent"
-                />
-                {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
-
+                <div>
+                  <input
+                    type="text" name="subject" value={formData.subject} onChange={handleInputChange}
+                    placeholder="Sujet de votre message"
+                    className="w-full bg-secondary/50 border border-border px-4 py-3 rounded-md focus:ring-accent focus:border-accent"
+                  />
+                  {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
+                </div>
               </div>
-              <textarea
-                name="message" value={formData.message} onChange={handleInputChange}
-                placeholder="Votre message *" required rows="6"
-                className="w-full bg-secondary/50 border border-border px-4 py-3 rounded-md focus:ring-accent focus:border-accent resize-none"
-              >
-              </textarea>
-              {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
 
+              <div>
+                <textarea
+                  name="message" value={formData.message} onChange={handleInputChange}
+                  placeholder="Votre message *" required rows="6"
+                  className="w-full bg-secondary/50 border border-border px-4 py-3 rounded-md focus:ring-accent focus:border-accent resize-none"
+                />
+                {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
+              </div>
+
+              {/* Champ anti-bot caché */}
               <input
-  type="text"
-  name="botcheck"
-  value={formData.botcheck}
-  onChange={handleInputChange}
-  style={{ display: 'none' }}
-  autoComplete="off"
-/>
+                type="text"
+                name="botcheck"
+                value={formData.botcheck}
+                onChange={handleInputChange}
+                style={{ display: 'none' }}
+                autoComplete="off"
+              />
 
               <div className="text-right">
                 <button type="submit" disabled={isSubmitting} className="btn-primary">
