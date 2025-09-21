@@ -45,8 +45,9 @@ const Contact = () => {
   if (!result.success) {
   const fieldErrors = {};
 
-  if (result.error?.errors) {
-    result.error.errors.forEach(err => {
+  // ✅ Zod retourne les erreurs dans "issues", pas "errors"
+  if (Array.isArray(result.error?.issues)) {
+    result.error.issues.forEach(err => {
       fieldErrors[err.path[0]] = err.message;
     });
   }
@@ -62,6 +63,7 @@ const Contact = () => {
   setIsSubmitting(false);
   return;
 }
+
 
   setErrors({});
 
