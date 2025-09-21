@@ -15,8 +15,9 @@ export const contactSchema = z.object({
   phone: z
     .string()
     .optional()
-    .regex(/^(\+243|0)(8[0-9]{8})$/, "Numéro congolais invalide")
-    .or(z.literal("")), // autorise champ vide
+    .refine(val => !val || /^(\+243|0)(8[0-9]{8})$/.test(val), {
+      message: "Numéro congolais invalide",
+    }),
 
   subject: z
     .string()
@@ -33,5 +34,5 @@ export const contactSchema = z.object({
 
   botcheck: z
     .string()
-    .max(0, "Bot détecté"), // honeypot invisible
+    .max(0, "Bot détecté"),
 });
