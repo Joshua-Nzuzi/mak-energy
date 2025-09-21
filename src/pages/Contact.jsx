@@ -44,11 +44,13 @@ const Contact = () => {
 
   if (!result.success) {
   const fieldErrors = {};
+  let errorMessages = []; // ✅ à ajouter
 
   // ✅ Zod retourne les erreurs dans "issues", pas "errors"
   if (Array.isArray(result.error?.issues)) {
     result.error.issues.forEach(err => {
       fieldErrors[err.path[0]] = err.message;
+      errorMessages.push(`${err.path[0]} : ${err.message}`); // ✅ on stocke les détails
     });
   }
 
@@ -56,13 +58,14 @@ const Contact = () => {
 
   toast({
     title: "Erreur de validation",
-    description: "Veuillez corriger les champs indiqués.",
+    description: errorMessages.join(" | "), // ✅ plus jamais undefined
     variant: "destructive"
   });
 
   setIsSubmitting(false);
   return;
 }
+
 
 
   setErrors({});
