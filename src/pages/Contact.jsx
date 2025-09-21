@@ -48,7 +48,7 @@ const Contact = () => {
 
     try {
       await emailjs.send(
-        'service_dku2oe7',     // ← remplace ici
+        'service_4h8g9rf',     // ← remplace ici
         'template_7an2egk',    // ← remplace ici
         {
           name: formData.name,
