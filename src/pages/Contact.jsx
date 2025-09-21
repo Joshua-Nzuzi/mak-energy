@@ -23,7 +23,8 @@ const Contact = () => {
     email: '',
     phone: '',
     subject: '',
-    message: ''
+    message: '',
+    botcheck: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -178,7 +179,17 @@ const Contact = () => {
                 name="message" value={formData.message} onChange={handleInputChange}
                 placeholder="Votre message *" required rows="6"
                 className="w-full bg-secondary/50 border border-border px-4 py-3 rounded-md focus:ring-accent focus:border-accent resize-none"
-              ></textarea>
+              >
+              </textarea>
+              <input
+  type="text"
+  name="botcheck"
+  value={formData.botcheck}
+  onChange={handleInputChange}
+  style={{ display: 'none' }}
+  autoComplete="off"
+/>
+
               <div className="text-right">
                 <button type="submit" disabled={isSubmitting} className="btn-primary">
                   {isSubmitting ? 'Envoi en cours...' : 'Envoyer le message'}
