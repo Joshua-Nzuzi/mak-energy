@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import emailjs from '@emailjs/browser';
+import { contactSchema } from '@/validation/contactSchema';
 
 const PageTransition = ({ children }) => (
   <motion.div
