@@ -43,22 +43,25 @@ const Contact = () => {
   const result = contactSchema.safeParse(formData);
 
   if (!result.success) {
-    const fieldErrors = {};
+  const fieldErrors = {};
+
+  if (result.error?.errors) {
     result.error.errors.forEach(err => {
       fieldErrors[err.path[0]] = err.message;
     });
-
-    setErrors(fieldErrors);
-
-    toast({
-      title: "Erreur de validation",
-      description: "Veuillez corriger les champs indiqués.",
-      variant: "destructive"
-    });
-
-    setIsSubmitting(false);
-    return;
   }
+
+  setErrors(fieldErrors);
+
+  toast({
+    title: "Erreur de validation",
+    description: "Veuillez corriger les champs indiqués.",
+    variant: "destructive"
+  });
+
+  setIsSubmitting(false);
+  return;
+}
 
   setErrors({});
 
