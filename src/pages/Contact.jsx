@@ -54,7 +54,7 @@ const Contact = () => {
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
-          subject: formData.subject,
+          title: formData.subject,
           message: formData.message,
         },
         'jYwSbHJgipbVSb_tC'       // ← remplace ici
