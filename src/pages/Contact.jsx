@@ -5,6 +5,8 @@ import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import emailjs from '@emailjs/browser';
 import { contactSchema } from '@/validation/contactSchema';
+import { formatZodErrors } from '@/lib/utils';
+
 
 const PageTransition = ({ children }) => (
   <motion.div
@@ -51,41 +53,32 @@ const Contact = () => {
 
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    // ✅ Validation avec Zod
-    const result = contactSchema.safeParse(formData);
+  const result = contactSchema.safeParse(formData);
 
-    if (!result.success) {
-      const fieldErrors = {};
-      let errorMessages = [];
+  if (!result.success) {
+    const { fieldErrors, globalMessage } = formatZodErrors(result.error);
 
-      if (Array.isArray(result.error?.issues)) {
-        result.error.issues.forEach(err => {
-          fieldErrors[err.path[0]] = err.message;
-          errorMessages.push(`${err.path[0]} : ${err.message}`);
-        });
-      }
+    setErrors(fieldErrors);
 
-      setErrors(fieldErrors);
+    toast({
+      title: "Erreur de validation",
+      description: globalMessage,
+      variant: "destructive",
+    });
 
-      toast({
-        title: "Erreur de validation",
-        description: errorMessages.join(" | "),
-        variant: "destructive"
-      });
-
-      setIsSubmitting(false);
-      return;
-    }
+    setIsSubmitting(false);
+    return;
+  }
 
     setErrors({}); // ✅ reset si tout est bon
 
     try {
       await emailjs.send(
-        'service_4h8g9rf',     // ⚠️ remplace par ton service ID
-        'template_7an2egk',    // ⚠️ remplace par ton template ID
+        'service_4h8g9rf',     
+        'template_7an2egk',    
         {
           name: formData.name,
           email: formData.email,
@@ -93,7 +86,7 @@ const Contact = () => {
           subject: formData.subject,
           message: formData.message,
         },
-        'jYwSbHJgipbVSb_tC'    // ⚠️ remplace par ta clé publique
+        'jYwSbHJgipbVSb_tC'    
       );
 
       toast({
