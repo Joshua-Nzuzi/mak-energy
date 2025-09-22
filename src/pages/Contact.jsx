@@ -31,9 +31,22 @@ const Contact = () => {
   const [errors, setErrors] = useState({});
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+  const { name, value } = e.target;
+
+  setFormData(prev => ({ ...prev, [name]: value }));
+
+  // Validation à la volée pour ce champ
+  const singleField = contactSchema.shape[name];
+  if (singleField) {
+    try {
+      singleField.parse(value);
+      setErrors(prev => ({ ...prev, [name]: undefined }));
+    } catch (err) {
+      setErrors(prev => ({ ...prev, [name]: err.message }));
+    }
+  }
+};
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
