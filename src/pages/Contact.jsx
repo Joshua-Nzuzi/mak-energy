@@ -42,10 +42,12 @@ const Contact = () => {
       singleField.parse(value);
       setErrors(prev => ({ ...prev, [name]: undefined }));
     } catch (err) {
-      setErrors(prev => ({ ...prev, [name]: err.message }));
+      const zodMessage = err?.issues?.[0]?.message || err.message || "Erreur de validation";
+      setErrors(prev => ({ ...prev, [name]: zodMessage }));
     }
   }
 };
+
 
 
   const handleSubmit = async (e) => {
