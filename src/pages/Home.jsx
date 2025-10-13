@@ -65,10 +65,10 @@ const PartnerSlider = () => {
 
 const Home = () => {
   const stats = [
-    { value: '10+', label: "Ans d'expérience" },
-    { value: '200+', label: 'Projets réussis' },
+    { value: '5+', label: "Ans d'expérience" },
+    { value: '50+', label: 'Projets réussis' },
     { value: '99%', label: 'Satisfaction client' },
-    { value: '4', label: "Domaines d'expertise" },
+    { value: '4+', label: "Domaines d'expertise" },
   ];
 
   const services = [
@@ -139,7 +139,7 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="bg-secondary/20 pt-32 pb-20">
+      <section className="bg-secondary/20 pt-16 pb-20">
         <div className="container-custom py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {stats.map((stat, index) => (

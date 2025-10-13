@@ -7,6 +7,7 @@ import Home from '@/pages/Home';
 import About from '@/pages/About';
 import Services from '@/pages/Services';
 import Contact from '@/pages/Contact';
+import ScrollToTop from '@/components/ScrollToTop';
 import { AnimatePresence } from 'framer-motion';
 
 const PageLayout = () => {
@@ -29,6 +30,7 @@ function App() {
       <div className="min-h-screen flex flex-col bg-background">
         <Navbar />
         <main className="flex-1">
+          <ScrollToTop />
           <PageLayout />
         </main>
         <Footer />

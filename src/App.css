@@ -17,6 +17,12 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+/* fichier global CSS (ex: globals.css) */
+.highlighted {
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15); /* bleu clair */
+  transition: box-shadow 0.2s ease;
+}
+
 
 @keyframes logo-spin {
   from {

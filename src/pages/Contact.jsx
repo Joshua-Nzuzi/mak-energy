@@ -124,7 +124,10 @@ const Contact = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <h1 className="font-bold">Entrons en <span className="text-accent">contact</span></h1>
+            <h1 className="font-bold leading-tight text-3xl sm:text-4xl">
+  Entrons en <span className="text-accent">contact</span>
+</h1>
+
             <p className="mt-4 text-lg max-w-3xl mx-auto text-gray-300">
               Nous sommes à votre disposition pour toute question ou demande de devis.
             </p>
@@ -160,14 +163,14 @@ const Contact = () => {
                 <Mail className="h-6 w-6 text-accent mt-1" />
                 <div>
                   <h3 className="font-semibold">Email</h3>
-                  <a href="mailto:makayamichel@gmail.com" className="text-gray-300 hover:text-accent transition-colors">makayamichel@gmail.com</a>
+                  <a href="mailto:makenergy496@gmail.com" className="text-gray-300 hover:text-accent transition-colors">makenergy496@gmail.com</a>
                 </div>
               </div>
               <div className="flex items-start gap-4">
                 <MapPin className="h-6 w-6 text-accent mt-1" />
                 <div>
                   <h3 className="font-semibold">Adresse</h3>
-                  <p className="text-gray-300">Kinshasa, République Démocratique du Congo</p>
+                  <p className="text-gray-300">2, AV Bahumbu,Q/Molo, C/Lemba, Kinshasa,République Démocratique du Congo</p>
                 </div>
               </div>
             </div>

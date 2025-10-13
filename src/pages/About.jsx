@@ -39,24 +39,6 @@ const About = () => {
     },
   ];
 
-  const team = [
-    {
-      name: 'John Kabeya',
-      role: 'Directeur Technique',
-      image: 'African male technical director in an office',
-    },
-    {
-      name: 'Grace Ngalula',
-      role: 'Chef de Projet Solaire',
-      image: 'African female solar project manager on site',
-    },
-    {
-      name: 'David Tshibangu',
-      role: 'Responsable Froid & Climatisation',
-      image: 'African male HVAC manager inspecting a unit',
-    },
-  ];
-
   return (
     <PageTransition>
       <Helmet>
@@ -72,7 +54,10 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <h1 className="font-bold">Notre mission : <span className="text-accent">l'excellence énergétique</span></h1>
+            <h1 className="font-bold leading-tight text-3xl sm:text-4xl">
+  Notre mission : <span className="text-accent">l'excellence énergétique</span>
+</h1>
+
             <p className="mt-4 text-lg max-w-3xl mx-auto text-gray-300">
               Nous nous engageons à fournir des solutions énergétiques fiables et innovantes qui soutiennent la croissance et le développement en Afrique.
             </p>
@@ -121,79 +106,88 @@ const About = () => {
 </section>
 
       {/* Values Section */}
-      <section className="section-padding bg-secondary/20">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <h2 className="font-bold">Nos <span className="text-accent">valeurs fondamentales</span></h2>
-            <p className="mt-4 text-gray-400">
-              Elles sont le socle de notre culture d'entreprise et guident chacune de nos actions.
-            </p>
-          </motion.div>
-          <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-card p-6 rounded-lg text-center"
-              >
-                {value.icon}
-                <h3 className="mt-4 text-xl font-semibold">{value.title}</h3>
-                <p className="mt-2 text-sm text-gray-400">{value.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
       <section className="section-padding">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <h2 className="font-bold">Rencontrez nos <span className="text-accent">experts</span></h2>
-            <p className="mt-4 text-gray-400">
-              Une équipe de professionnels dévoués et expérimentés, prêts à relever vos défis.
-            </p>
-          </motion.div>
-          <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-                viewport={{ once: true }}
-                className="bg-card rounded-lg overflow-hidden text-center group"
-              >
-                <div className="h-64 overflow-hidden">
-                  <img
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    alt={member.name}
-                   src="https://images.unsplash.com/photo-1595872018818-97555653a011" />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold">{member.name}</h3>
-                  <p className="text-accent font-medium">{member.role}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+  <div className="container-custom">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
+      viewport={{ once: true }}
+      className="text-center max-w-3xl mx-auto"
+    >
+      <h2 className="font-bold">Rencontrez nos <span className="text-accent">experts</span></h2>
+      <p className="mt-4 text-gray-400">
+        Une équipe de professionnels dévoués et expérimentés, prêts à relever vos défis.
+      </p>
+    </motion.div>
+
+    <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* CEO */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        className="bg-card rounded-lg overflow-hidden text-center group"
+      >
+        <div className="h-64 overflow-hidden">
+          <img
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            alt="Michel Makaya"
+            src="/images/team/CEO.png"
+          />
         </div>
-      </section>
+        <div className="p-6">
+          <h3 className="text-xl font-semibold">Michel Makaya</h3>
+          <p className="text-accent font-medium">CEO</p>
+        </div>
+      </motion.div>
+
+      {/* Technical Director */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.15 }}
+        viewport={{ once: true }}
+        className="bg-card rounded-lg overflow-hidden text-center group"
+      >
+        <div className="h-64 overflow-hidden">
+          <img
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            alt="Exaucé Nduenga"
+            src="/images/team/Technical-Director.png"
+          />
+        </div>
+        <div className="p-6">
+          <h3 className="text-xl font-semibold">Exaucé Nduenga</h3>
+          <p className="text-accent font-medium">Technical Director</p>
+        </div>
+      </motion.div>
+
+      {/* Electrical Project Manager */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        viewport={{ once: true }}
+        className="bg-card rounded-lg overflow-hidden text-center group"
+      >
+        <div className="h-64 overflow-hidden">
+          <img
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            alt="Jonathan Kitsisa"
+            src="/images/team/Electrical-Project-Manager.png"
+          />
+        </div>
+        <div className="p-6">
+          <h3 className="text-xl font-semibold">Jonathan Kitsisa</h3>
+          <p className="text-accent font-medium">Electrical Project Manager</p>
+        </div>
+      </motion.div>
+    </div>
+  </div>
+</section>
+
     </PageTransition>
   );
 };
