@@ -54,6 +54,7 @@ const Services = () => {
         'Automatisme',
         'Maintenance préventive',
         'Groupes électrogènes',
+        'Installation et configuration de systèmes de vidéosurveillance'
       ],
       image: industryImage,
     },
