@@ -54,11 +54,12 @@ export const contactSchema = z.object({
     .max(100, { message: "Adresse email trop longue (maximum 100 caractères)" }),
 
   phone: z
-    .string()
-    .optional()
-    .refine(val => !val || /^(\+243|0)(8[0-9]{8})$/.test(val), {
-      message: "Numéro de téléphone congolais invalide (ex: +2438XXXXXXXX ou 08XXXXXXXX)"
-    }),
+  .string()
+  .optional()
+  .refine(val => !val || /^(\+243|0)(8|9)[0-9]{8}$/.test(val), {
+    message: "Numéro de téléphone invalide",
+  })
+  ,
 
   subject: z
     .string()
@@ -70,7 +71,7 @@ export const contactSchema = z.object({
     .min(10, { message: "Le message doit contenir au moins 10 caractères" })
     .max(1000, { message: "Le message est trop long (maximum 1000 caractères)" })
     .refine(msg => !/(https?:\/\/|<script|SELECT|INSERT|DELETE|DROP)/i.test(msg), {
-      message: "Le message contient des éléments suspects"
+      message: "format de message invalide",
     }),
 
   botcheck: z
