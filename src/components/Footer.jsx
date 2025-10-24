@@ -126,7 +126,7 @@ const Footer = () => {
           <p className="text-gray-500 text-sm">
             Built by{' '}
             <a
-              href="https://portfolio-fullstack-git-main-joshua-nzuzis-projects.vercel.app/?_vercel_share=8bNVGyevvHLMM2LVUrx7fkNDJAt6AQ55"
+              href="https://portfolio-fullstack-umber.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
               className="underline hover:text-accent transition-colors duration-300"
