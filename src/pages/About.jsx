@@ -121,70 +121,94 @@ const About = () => {
       </p>
     </motion.div>
 
-    <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      {/* CEO */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true }}
-        className="bg-card rounded-lg overflow-hidden text-center group"
-      >
-        <div className="h-64 overflow-hidden">
-          <img
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            alt="Michel Makaya"
-            src="/images/team/CEO.png"
-          />
-        </div>
-        <div className="p-6">
-          <h3 className="text-xl font-semibold">Michel Makaya</h3>
-          <p className="text-accent font-medium">CEO</p>
-        </div>
-      </motion.div>
+    <div className="mt-16">
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+    {/* CEO */}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+      className="bg-card rounded-lg overflow-hidden text-center group"
+    >
+      <div className="w-full h-64 md:h-[280px] lg:h-[300px] xl:h-[320px] overflow-hidden">
+        <img
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          alt="Michel Makaya"
+          src="/images/team/CEO.png"
+        />
+      </div>
+      <div className="p-6">
+        <h3 className="text-xl font-semibold">Michel Makaya</h3>
+        <p className="text-accent font-medium">CEO</p>
+      </div>
+    </motion.div>
 
-      {/* Technical Director */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.15 }}
-        viewport={{ once: true }}
-        className="bg-card rounded-lg overflow-hidden text-center group"
-      >
-        <div className="h-64 overflow-hidden">
-          <img
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            alt="Exaucé Nduenga"
-            src="/images/team/Technical-Director.png"
-          />
-        </div>
-        <div className="p-6">
-          <h3 className="text-xl font-semibold">Exaucé Nduenga</h3>
-          <p className="text-accent font-medium">Technical Director</p>
-        </div>
-      </motion.div>
+    {/* Technical Director */}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.15 }}
+      viewport={{ once: true }}
+      className="bg-card rounded-lg overflow-hidden text-center group"
+    >
+      <div className="w-full h-64 md:h-[280px] lg:h-[300px] xl:h-[320px] overflow-hidden">
+        <img
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          alt="Exaucé Nduenga"
+          src="/images/team/Technical-Director.png"
+        />
+      </div>
+      <div className="p-6">
+        <h3 className="text-xl font-semibold">Exaucé Nduenga</h3>
+        <p className="text-accent font-medium">Technical Director</p>
+      </div>
+    </motion.div>
 
-      {/* Electrical Project Manager */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-        viewport={{ once: true }}
-        className="bg-card rounded-lg overflow-hidden text-center group"
-      >
-        <div className="h-64 overflow-hidden">
-          <img
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            alt="Jonathan Kitsisa"
-            src="/images/team/Electrical-Project-Manager.png"
-          />
-        </div>
-        <div className="p-6">
-          <h3 className="text-xl font-semibold">Jonathan Kitsisa</h3>
-          <p className="text-accent font-medium">Electrical Project Manager</p>
-        </div>
-      </motion.div>
-    </div>
+    {/* DRH */}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.15 }}
+      viewport={{ once: true }}
+      className="bg-card rounded-lg overflow-hidden text-center group"
+    >
+      <div className="w-full h-64 md:h-[280px] lg:h-[300px] xl:h-[320px] overflow-hidden">
+        <img
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          alt="Rolly Mbuluku"
+          src="/images/team/DRH.png"
+        />
+      </div>
+      <div className="p-6">
+        <h3 className="text-xl font-semibold">Rolly Mbuluku</h3>
+        <p className="text-accent font-medium">DRH</p>
+      </div>
+    </motion.div>
+
+    {/* Electrical Project Manager */}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.3 }}
+      viewport={{ once: true }}
+      className="bg-card rounded-lg overflow-hidden text-center group"
+    >
+      <div className="w-full h-64 md:h-[280px] lg:h-[300px] xl:h-[320px] overflow-hidden">
+        <img
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          alt="Jonathan Kitsisa"
+          src="/images/team/Electrical-Project-Manager.png"
+        />
+      </div>
+      <div className="p-6">
+        <h3 className="text-xl font-semibold">Jonathan Kitsisa</h3>
+        <p className="text-accent font-medium">Electrical Project Manager</p>
+      </div>
+    </motion.div>
+  </div>
+</div>
+
   </div>
 </section>
 
